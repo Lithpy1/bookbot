@@ -1,32 +1,44 @@
-def bookintotext():
-    with open("books/frankenstein.txt") as f:
-        return f.read()
+bookpath = "books/frankenstein.txt"
 
 def main():
-    print(bookintotext())
-    countallwords()
-    #print(charactertally())
-    print(report())
+    #print(bookintotext(bookpath))
+    print(f"--- Begin report of {bookpath} ---")
+    print("")
+    print(f"There are {countallwords()} words")
+    print("")
+    report()
+    print("--- End report ---")
+
+def bookintotext(book):
+    with open(book) as f:
+        return f.read()    
 
 def countallwords():
-    booktext = bookintotext()
+    booktext = bookintotext(bookpath)
     words = booktext.split()
-    print(len(words))
+    return len(words)
     
 
 def charactertally():
     alphabet = "abcdefghijklmnopqrstuvwxyz"
-    booktext = bookintotext()
+    booktext = bookintotext(bookpath)
     lowertext = booktext.lower()
     tallycount = {}
     for alphabet in alphabet:
-         tallycount[alphabet] = booktext.count(alphabet)
+         tallycount[alphabet] = lowertext.count(alphabet)
     return tallycount
+
 
 def report():
     tallycount = charactertally()
     sortedtally = dict(sorted(tallycount.items(), key=lambda item:item[1], reverse = True))
-    #This will sort the dictionary but I can't figure out how to call the keys and values by index.
+    sortedlist = list(sortedtally)
+    for i in range(0,len(sortedlist)):
+        print(f"The {sortedlist[i]} character was found {sortedtally[sortedlist[i]]} times")
+    
+    
+
+
         
 
 
